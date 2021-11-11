@@ -1,2 +1,5 @@
-# Procedural-programming
-Programs written for my university procedural programming course
+# Procedural programming
+
+Everything here is written in C
+
+To build and run simply `cd` into a folder and `make` (unless stated otherwise)
