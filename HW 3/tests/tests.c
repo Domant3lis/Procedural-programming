@@ -123,8 +123,3 @@ void get_str_from_file(FILE *fp, char *str)
 		fseek(fp, -1, SEEK_CUR);
 	}
 }
-
-// for (int i = 0; i < strlen(cmp); ++i)
-// {
-// 	printf("'%c' '%c' %d %d\n", cmp[i], str[i], cmp[i], str[i]);
-// }
