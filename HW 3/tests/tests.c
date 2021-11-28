@@ -75,7 +75,6 @@ void test() {
 	assert(!strcmp(cmp, str) );
 
 
-
 	temp = fopen("./temp", "w");
 	input = fopen("./tests/test3.txt", "r");
 	strcpy(cmp,"12345678987654321\n,./;''\\[]`==`][\\'';/.,\n"
@@ -91,16 +90,75 @@ void test() {
 	temp = fopen("./temp", "w");
 	input = fopen("./tests/test3.txt", "r");
 
+	write_results(input, temp, false);
+	freopen("./temp", "r", temp);
+	get_str_from_file(temp, str);
+	assert(!strcmp(cmp, str) );
+
+
+	temp = fopen("./temp", "w");
+	input = fopen("./tests/test4.txt", "r");
+	strcpy(cmp,"did\ndid\ndid\ndid\ndid\nseeS\n");
+
+	write_results(input, temp, false);
+	freopen("./temp", "r", temp);
+	get_str_from_file(temp, str);
+	assert(!strcmp(cmp, str) );
+
+
+	temp = fopen("./temp", "w");
+	input = fopen("./tests/test4.txt", "r");
+	strcpy(cmp,"did\ndid\ndid\ndid\ndid\n");
+
 	write_results(input, temp, true);
 	freopen("./temp", "r", temp);
 	get_str_from_file(temp, str);
-	for (int i = 0; i < strlen(str); ++i)
+	assert(!strcmp(cmp, str) );
+
+
+
+	temp = fopen("./temp", "w");
+	input = fopen("./tests/test5.txt", "r");
+	strcpy(cmp,"did\n");
+
+	write_results(input, temp, false);
+	freopen("./temp", "r", temp);
+	get_str_from_file(temp, str);
+	assert(!strcmp(cmp, str) );
+
+
+	temp = fopen("./temp", "w");
+	input = fopen("./tests/test5.txt", "r");
+	strcpy(cmp,"did\n");
+
+	write_results(input, temp, true);
+	freopen("./temp", "r", temp);
+	get_str_from_file(temp, str);
+	assert(!strcmp(cmp, str) );
+
+
+	temp = fopen("./temp", "w");
+	input = fopen("./tests/test6.txt", "r");
+	strcpy(cmp,"uWwu\nUwU\n");
+
+	write_results(input, temp, false);
+	freopen("./temp", "r", temp);
+	get_str_from_file(temp, str);
+	assert(!strcmp(cmp, str) );
+
+
+	temp = fopen("./temp", "w");
+	input = fopen("./tests/test6.txt", "r");
+	strcpy(cmp,"UwU\n");
+
+	write_results(input, temp, true);
+	freopen("./temp", "r", temp);
+	get_str_from_file(temp, str);
 	assert(!strcmp(cmp, str) );
 
 
 	fclose(input);
 	fclose(temp);
-	printf("ALL TESTS PASSED SUCCEFULLY\n");
 	exit(0);
 }
 
@@ -108,7 +166,6 @@ void get_str_from_file(FILE *fp, char *str)
 {
 	str[0] = 0;
 	char ch = 0;
-	// res = calloc(TEST_CAPACITY, sizeof(char));
 	while(ch != EOF)
 	{
 		char get[1000];

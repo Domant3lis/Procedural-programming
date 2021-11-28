@@ -2,10 +2,10 @@ CC = clang
 CFLAGS = -Wall -Wextra -Wpedantic -g -lm
 TARGET = main
 
-main: main.c
-	./$(TARGET).o
+main: build
+	@echo "Run by typing ./main.o"
 
-main.c:
+build:
 	$(CC) $(CFLAGS) $(TARGET).c -o $(TARGET).o
 
 test:
