@@ -163,6 +163,13 @@ void str_alloc_check(char *str)
 	}
 }
 
+// This functions finds all palindromes from a given file stream (`in`)
+// and writes the resuts into another (`out`)
+// `is_case_sensitive` provides the option to
+//
+// IMPORTANT:
+// This function does not open or close any file streams
+// they should be opened and closed before and after the function is called
 void write_results(FILE *in, FILE *out, bool is_case_sensitive)
 {
 	// Gets file size
@@ -175,6 +182,7 @@ void write_results(FILE *in, FILE *out, bool is_case_sensitive)
 	buffer = calloc(sizeof(char), BUFFER_SIZE);
 	str_alloc_check(buffer);
 
+	// Allocates memeory for a string
 	char *last_word = NULL;
 	last_word = calloc(sizeof(char), BUFFER_SIZE);
 	str_alloc_check(last_word);
@@ -186,8 +194,8 @@ void write_results(FILE *in, FILE *out, bool is_case_sensitive)
 	{
 		size = fread(buffer, sizeof(char), BUFFER_SIZE, in);
 
-		// counts all the words in buffer
-		// this is neccesary in order to later check a word
+		// counts all the words in the buffer
+		// this is neccesary in order to later check if a word
 		// is the last word and handle that appropriately
 		// since they might be split accross buffers
 		int word_count = 0;
@@ -207,10 +215,16 @@ void write_results(FILE *in, FILE *out, bool is_case_sensitive)
 			free(buffer_cpy);
 		}
 
+		// Allocates memory for a temporary string
 		char *result = NULL;
 		result = calloc(sizeof(char), BUFFER_SIZE);
 		str_alloc_check(result);
 
+		// Tracks how many chars are left unread
+		// and later compares to BUFFER_SIZE
+		// this is done in order to see if a word
+		// is last in the text so that it can be cheched as unsplit word
+		// as compared to other words at the end of buffers which may be split
 		file_size -= BUFFER_SIZE;
 		bool last_buffer = true;
 		if (file_size > 0)
@@ -225,11 +239,8 @@ void write_results(FILE *in, FILE *out, bool is_case_sensitive)
 			// that it may have been split between buffers and it is
 			// neccesary to check if the the current buffer doesnt begin
 			// with a word which has been split up between buffers
-
 			bool check = is_palindrome(word, is_case_sensitive);
 			check = check && (((ix + 1) != word_count) || last_buffer);
-
-			// check = (check && check_AAAAA);
 
 			if (strlen(last_word) && (0 == ix) && (word[0] != ' ' || word[0] != '\n'))
 			{
