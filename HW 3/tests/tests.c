@@ -79,7 +79,7 @@ void test() {
 	temp = fopen("./temp", "w");
 	input = fopen("./tests/test3.txt", "r");
 	strcpy(cmp,"12345678987654321\n,./;''\\[]`==`][\\'';/.,\n"
-		",sd./;''\\\[]`==`][\\\'';/.ds,\n"
+		",sd./;''\\[]`==`][\\'';/.ds,\n"
 		"123,321\n");
 
 	write_results(input, temp, true);
