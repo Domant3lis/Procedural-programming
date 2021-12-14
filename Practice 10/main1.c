@@ -22,7 +22,7 @@ int main() {
 	assert(cmp("asd_\n "));
 	assert(cmp(get_test_string(98765432)));
 	// Uncomment if you like watching paint dry
-	// assert(cmp(get_test_string(-1)));
+	assert(cmp(get_test_string(-1)));
 
 	char str[][101] = {
 		{
