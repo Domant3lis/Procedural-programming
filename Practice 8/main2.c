@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <string.h>
 
+// specific functions get specific names
 char *getNameOfLargestFileSizeFromArrStr(int argc, char **argv);
 long getFileSize(char *fileName);
 
