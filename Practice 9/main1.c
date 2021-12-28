@@ -9,7 +9,7 @@ typedef struct
 
 void printPoint(Point p)
 {
-	printf("%lf %lf", p.x, p.y);
+	printf("%lf %lf  ", p.x, p.y);
 }
 
 Point createPoint(double x, double y)

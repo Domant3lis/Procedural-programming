@@ -43,7 +43,10 @@ void insertElement(List **list, int value)
 	*list = new;
 }
 
-int getElement(List *list) { return list->value; }
+int getElement(List *list)
+{
+	return list->value;
+}
 
 int deleteElement(List **list)
 {

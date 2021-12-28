@@ -5,7 +5,7 @@
 typedef struct
 {
 	int *data;
-	size_t size;
+	int size;
 } Stack;
 
 void initStack(Stack *stack)
@@ -16,7 +16,7 @@ void initStack(Stack *stack)
 
 void printStack(Stack *stack)
 {
-	for (size_t i = 0; i < stack->size; ++i)
+	for (int i = 0; i < stack->size; ++i)
 		printf("%d ", stack->data[i]);
 }
 
@@ -27,14 +27,16 @@ int getStackSize(Stack *stack)
 
 void push(Stack *stack, int value)
 {
-	stack->data = realloc(stack->data, stack->size + 1);
-	stack->data[stack->size - 1] = value;
+	stack->data = realloc(stack->data, (stack->size + 1) * sizeof(int));
+	stack->data[stack->size] = value;
+	stack->size += 1;
 }
 
 int pop(Stack *stack)
 {
 	int temp = stack->data[stack->size - 1];
-	stack->data = realloc(stack->data, stack->size - 1);
+	stack->data = realloc(stack->data, (stack->size - 1) * sizeof(int));
+	stack->size -= 1;
 	return temp;
 }
 
@@ -52,6 +54,18 @@ int top(Stack *stack)
 
 int main()
 {
+	Stack foo;
+	initStack(&foo);
+	printStack(&foo);
+	printf("STACK SIZE IS: %d\n", getStackSize(&foo));
+	push(&foo, 1);
+	push(&foo, 2);
+	printf("POPED: %d\n", pop(&foo));
+	push(&foo, 3);
+	printStack(&foo);
+	printf("\nTOP: %d\n", top(&foo));
+	destroyStack(&foo);
+	printStack(&foo);
 
 	return 0;
 }

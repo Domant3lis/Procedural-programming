@@ -9,22 +9,26 @@ typedef struct
 typedef struct List List;
 struct List
 {
-	Point value;
+	Point point;
 	List *next;	
 };
 
-List *createList(double x, double y)
+void printPoint(Point p)
+{
+	printf("%lf %lf  ", p.x, p.y);
+}
+
+List *createList(Point p)
 {
 	List *new = calloc(sizeof(List), 1);
-	new->value.x = x;
-	new->value.y = y;
+	new->point = p;
 	new->next = NULL;
 	return new;
 }
 
 void printList(List *list)
 {
-	printf("%lf %lf  ", list->value.x, list->value.y);
+	printPoint(list->point);
 	if (list->next != NULL)
 		printList(list->next);
 }
@@ -41,14 +45,17 @@ int getListSize(List *list)
 	return count;
 }
 
-void insertElement(List **list, double x, double y)
+void insertElement(List **list, Point p)
 {
-	List *new = createList(x, y);
+	List *new = createList(p);
 	new->next = *list;
 	*list = new;
 }
 
-Point getElement(List *list) { return list->value; }
+Point getElement(List *list)
+{
+	return list->point;
+}
 
 Point deleteElement(List **list)
 {
@@ -76,11 +83,22 @@ void destroyList(List **list)
 
 int main()
 {
-	List *foo = createList(1, 1);
-	insertElement(&foo, 2, 2);
-	insertElement(&foo, 3, 3);
-	insertElement(&foo, 4, 4);
-	insertElement(&foo, 5, 5);
+	Point p;
+	p.x = 1;
+	p.y = 1;
+	List *foo = createList(p);
+	p.x = 2;
+	p.y = 2;
+	insertElement(&foo, p);
+	p.x = 3;
+	p.y = 3;
+	insertElement(&foo, p);
+	p.x = 4;
+	p.y = 4;
+	insertElement(&foo, p);
+	p.x = 5;
+	p.y = 5;
+	insertElement(&foo, p);
 	printList(foo);
 	printf("SIZE: %d\n", getListSize(foo));
 	Point bar = deleteElement(&foo);
