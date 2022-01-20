@@ -19,3 +19,22 @@
     5 min pertrauka
     7 min pertrauka
 
+20:40 - 20:43
+    Copy / paste List
+
+20:49 - 21:13
+    Architektūrinimas
+
+
+2022-01-11
+
+16:08-17:00
+    Programavimas
+    Expense struct'as
+
+23:00-02:13
+    Programavimas
+
+
+2022-01-12
+    12:12 - 
