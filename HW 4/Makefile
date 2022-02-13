@@ -1,22 +1,22 @@
-# valgrind --tool=memcheck ./intal.out
+CC = clang
 CFLAGS = -W -Wextra -Wall -Wpedantic -pedantic
 CFLAGS_MEMSAN = -fsanitize=memory -fno-omit-frame-pointer
-CFLAGS_UNDEFB = -fsanitize=undefined
-CFLAGS_ADRSAN = -fsanitize=address
-
-CC = clang
+CFLAGS_UNDEFB = -fsanitize=undefined -fno-sanitize-recover=all
+CFLAGS_ADRSAN = -fsanitize=address -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 
 all:
-	$(CC) $(CFLAGS_ADRSAN) -g main.c -o main
-	$(CC) $(CFLAGS_UNDEFB) -g main.c -o main
-	$(CC) $(CFLAGS_MEMSAN) -g main.c -o main
-	$(CC) $(CFLAGS) -g main.c -o main
-	valgrind --tool=memcheck -s --leak-check=full ./main
-	./main
+	$(CC) $(CFLAGS_ADRSAN) $(CFLAGS_UNDEFB) -g demo.c list.c myutilities.c -o demo
+	$(CC) $(CFLAGS_MEMSAN) -g demo.c list.c myutilities.c -o demo
+	$(CC) $(CFLAGS) -g demo.c list.c myutilities.c -o demo
+	valgrind --tool=memcheck -s --leak-check=full ./demo
 
-raw:
-	$(CC) $(CFLAGS) main.c -o -O3 main
-	./main
+uic:
+	$(CC) $(CFLAGS) -g list.c myutilities.c ui.c -o ui
+	./ui	
+
+release:
+	$(CC) demo.c myutilities.c list.c -O3 -o demo
+	./demo
 
 build:
-	$(CC) main.c -o -O3 main
+	$(CC) demo.c -o -O3 demo
